@@ -1,0 +1,63 @@
+CSS Libariries 
+1. Bootstrap
+2. Materialize 
+3. Tailwind CSS
+4. Shadcn UI
+5. Aceternity UI 
+6. Magic UI 
+7. Daisy UI
+6. Miui
+7. Flowbite - corporate
+8. Ant Design - corporate
+
+For beautiful websites -->
+font -> images -> components
+
+CSS - 1) select element 
+      2) style element
+
+Location of CSS - 1) inline using style attribute
+                  2) internal using style tag
+                  3) external using link tag
+
+-----LOGIN PAGE-----
+1. using flex box to center the items. Flex runs on the parent element.
+2. it is a common practice to flush out margin and padding of the browser.           
+
+---------CSS SELECTORS----------
+DOM -> Document Object Model - converts html to a tree like structure.
+Read CSS relationship from right to left.  
+1. Universal selector - to flush out browser's css. margin,padding, box-sizing - *{}
+2. Type selector - select element. - h1{}
+3. Class selector - can have multiple classes on one webpage. - .class{}
+4. Id selector - recommended to have 1 unique id on one webpage. - #id{} .
+5. Attribute selector - input[type="text"]{} specific attribute of the tag. 
+6. Descendent selector - selects all Descendent tag of parent element (no matter what if the tag specified is direct child or not). h1 p{} (select all p which are descendents of h1)
+7. Child selector - selects the direct child of parent. - h1>p{} (select all p which are direct children of h1)
+8. Adjacent sibling selector - selects adjacent sibling of the element. - h1+p{} (select p which is adjacent to h1)
+9. General sibling selector - selects all the siblings of the element. - h1~p{} (select all p tags after h1 that come at same hierarchy)
+10. Pseudo class selector - to style the state. - a:hover{} (change the styling of link when hovered upon)
+11. Pseudo element selector - to select the content of the tag. - p::first-letter{} (change first letter of text wrapped by all p tags)
+12. Grouping selector - to select multiple tags together. h1,h2,h3{} (select all h1, h2 and h3)
+
+--------------BOX MODEL---------------
+box-sizing = border-box or content-box(by default)
+1. Content-Box - actual width/height of container = width/height + padding + border
+2. Border-Box - acutaly width/height of container includes the padding and border. it is the same as specified in css. 
+
+--------------INLINE AND BLOCK LEVEL ELEMENTS--------------
+1. block level elements - take full width of the screen. 
+2. inline elements - don't take their own space/full width of the screen. 
+
+
+---------------------AFTER PSEUDO ELEMENT------------------------
+1. .class::after - to create a Pseudo element after the selector.
+                 - needs to have content always. 
+                 - inline by default. 
+2. .class:hover::after - to target hover effect on the element created after the selector. 
+
+
+----------------POSITION---------------
+1. Descendent is set as position: absolute. 
+2. This position will be relative to the parent. => parent's position: relative. 
+3. Absolute position rips off the element out of the DOM and injects it again. 

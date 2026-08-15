@@ -1,0 +1,14 @@
+======== STUDY HTML FROM MDN DOCS =======
+SEMANTIC HTML 
+-- used for screenreaders and accessibility purposes. 
+-- for differentiating different sections of a webpage like header, navbar, section, sidebar, main content, footer etc. 
+-- hgroup tag to hold headings
+-- time tag
+-- code tag 
+-- address tag
+
+MEDIA 
+-- figure tag
+-- video tag with controls attribute
+-- audio tag
+-- ARIA tags -> Application Rich Internet Application
