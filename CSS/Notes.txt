@@ -61,3 +61,18 @@ box-sizing = border-box or content-box(by default)
 1. Descendent is set as position: absolute. 
 2. This position will be relative to the parent. => parent's position: relative. 
 3. Absolute position rips off the element out of the DOM and injects it again. 
+
+
+--------------------FLEX BOX MASTERCLASS ----------------------
+1. main axis on the world of web: left to right 
+2. other axis: top to bottom
+3. properties starting with justify: main axis
+4. properties starting with align: other axis
+5. flex wrap - to insert a new row so that elements are not mushed together in single row.
+6. order property - will be applied to children when parent has display:flex.
+                  - it is responsible to order the elements.
+7. flex grow - applied to the children.
+             - responsible for giving space to the elements.
+8. align self - applied to the children.
+              - responsible for aligning the elements. 
+
