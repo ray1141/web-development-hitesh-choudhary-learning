@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Warning Card</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+      }
+      .card-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #fff;
+      }
+      .card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 400px;
+        height: 300px;
+        padding: 20px;
+        border: 5px solid #222;
+        background-color: #fff;
+        box-shadow: 8px 8px 0px #222;
+      }
+      .card-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      h2 {
+        margin-right: 10px;
+      }
+      img {
+        height: 50px;
+        width: 50px;
+      }
+      hr {
+        width: 100%;
+        border: 1px solid #222;
+        margin: 10px 0;
+      }
+      .btn {
+        display: flex;
+        flex-direction: column;
+      }
+      .btn-1 {
+        background-color: #fff;
+        color: #222;
+        border: 5px solid #222;
+        padding: 10px 20px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        margin-top: 10px;
+        width: 200px;
+        box-shadow: 4px 4px 0px #222;
+      }
+      .btn-1:hover {
+        background-color: #6495ed;
+        border: 5px solid #6495ed;
+        color: #fff;
+        box-shadow: 4px 4px 0px #4172ce;
+        transition: 0.2s;
+        transform: translate(-2px, -2px);
+      }
+      .btn-2 {
+        background-color: #222;
+        color: #fff;
+        border: 5px solid #222;
+        padding: 10px 20px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        margin-top: 10px;
+        width: 200px;
+        box-shadow: 4px 4px 0px #222;
+      }
+      .btn-2:hover {
+        background-color: #dc3c5c;
+        border: 5px solid #dc3c5c;
+        color: #fff;
+        box-shadow: 4px 4px 0px #dc143c;
+        transition: 0.2s;
+        transform: translate(-2px, -2px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card-container">
+      <div class="card">
+        <div class="card-header">
+          <img src="/icon.jpg" alt="icon" />
+          <h2>WARNING</h2>
+        </div>
+        <hr />
+        <p>
+          This is a warning message. Please proceed with caution and follow the
+          instructions carefully.
+        </p>
+        <hr />
+        <div class="btn">
+          <button class="btn-1"><b>MARK AS READ</b></button>
+          <button class="btn-2"><b>OKAY</b></button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
