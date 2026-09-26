@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Building Layouts with Tailwind</title>
+    <link href="output.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- CASE 1: equal divisions in large as well as mobile screens -->
+    <!-- <div class="m-4 grid grid-cols-2 sm:grid-cols-2 gap-4">
+      <div class="bg-orange-500 min-h-[100px]"></div>
+      <div class="bg-teal-500 min-h-[100px]"></div>
+    </div> -->
+    <!-- CASE 2: equal divisions in large screen but not in mobile screen -->
+    <!-- <div class="m-4 grid sm:grid-cols-2 gap-4">
+      <div class="bg-orange-500 min-h-[100px]"></div>
+      <div class="bg-teal-500 min-h-[100px]"></div>
+    </div> -->
+    <!-- <div class="m-4 grid sm:grid-cols-3 gap-4">
+      <div class="bg-orange-500 min-h-[100px]"></div>
+      <div class="bg-teal-500 min-h-[100px]"></div>
+      <div class="bg-purple-500 min-h-[100px]"></div>
+    </div> -->
+    <!-- CASE 3: unequal divisions on large screens -->
+    <!-- <div class="m-4 grid-cols-1 grid sm:grid-cols-12 gap-4">
+      <div class="col-span-2 bg-orange-500 min-h-[100px]"></div>
+      <div class="col-span-10 bg-teal-500 min-h-[100px]"></div>
+    </div> -->
+    <!-- CASE 4: tailwind way of unequal partition-->
+    <div class="m-4 grid sm:grid-cols-12 md:grid-cols-12 gap-4">
+      <div
+        class="sm:col-span-4 md:col-span-2 sm:block hidden bg-orange-500 min-h-[100px]"
+      ></div>
+      <div class="md:col-span-8 sm:col-span-8 bg-teal-500 min-h-[100px]"></div>
+      <div
+        class="md:col-span-2 md:block hidden bg-purple-500 min-h-[100px]"
+      ></div>
+    </div>
+  </body>
+</html>

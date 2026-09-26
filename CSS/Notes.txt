@@ -76,3 +76,19 @@ box-sizing = border-box or content-box(by default)
 8. align self - applied to the children.
               - responsible for aligning the elements. 
 
+---------------------GRID LAYOUT------------------------
+1. applied on parent as display:grid.
+2. requires info about rows(grid-template-rows) and columns(grid-template-columns).
+3. gap - introduce gap between each elements.
+4. grid template areas - parent and grid area - children
+5. autofit and minmax is like flex wrap. gtc: repeat(autofit, minmax(100px, 1fr))
+
+
+----------------------RESPONSIVITY-------------------------------
+1. min-width - minimum width that is required by the element.
+2. max-width - maximum width that an element can take.
+
+--------------------- TAILWIND CSS ------------------------------------
+1. promotes atomicity. 
+2. provides mobile-first approach to build responsive layouts.\
+3. Common UI practice - to divide the screen to 12 parts and then give col spans to the children. 

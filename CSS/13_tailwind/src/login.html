@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page Using Tailwind CSS</title>
+    <link href="./output.css" rel="stylesheet" />
+  </head>
+  <body
+    class="shadow-3xl bg-gray-900 text-white flex items-center justify-center min-h-screen"
+  >
+    <div class="bg-gray-600 w-full rounded-lg p-8 max-w-md">
+      <h2 class="text-lg font-semibold text-center mb-5">Login</h2>
+      <div>
+        <form action="">
+          <div class="mb-4">
+            <label class="block text-sm mb-2" for="email">Email</label>
+            <input
+              class="block bg-gray-500 w-full rounded-md p-1 text-gray-900 focus:ring-2 focus:ring-gray-900 focus:outline-none"
+              type="email"
+              id="email"
+              name="email"
+            />
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm mb-2" for="password">Password</label>
+            <input
+              class="block bg-gray-500 w-full rounded-md p-1 text-gray-900 focus:ring-2 focus:ring-gray-900 focus:outline-none"
+              type="password"
+              id="password"
+              name="password"
+            />
+          </div>
+          <button
+            class="shadow-2xl w-full bg-gray-500 hover:cursor-pointer hover:bg-gray-900 text-white font-md py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-100"
+          >
+            Login
+          </button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
