@@ -1,0 +1,35 @@
+===============JAVASCRIPT=================
+1. Node.js and V8 engine are interchangeable.
+2. Dino, Bun, Node.js are JS runtime environments.
+3. Javascript can be used for - front-end web apps, backend, desktop apps, mobile apps. 
+
+===============HOW JS EXECUTES THE CODE===============
+1. just in time compiler 
+
+===============DATATYPES================
+1. String
+2. Number
+3. Boolean
+4. Bigint 
+5. Undefined
+6. Null
+7. Object
+8. Symbol - ensures uniqueness of values. 
+Use typeof method to know the data type of the variable.
+
+==================PRIMITIVES=================
+1. String 
+2. Boolean 
+3. Number 
+4. Null
+5. Undefined
+6. Symbol
+7. Every primitive can be converted to a Non-primitive therefore everything is an object. 
+
+=================NON-PRIMITIVES===============
+1. Objects 
+    a) arrays
+    b) functions
+    c) objects
+2. A const object can have mutable key-value pairs. 
+3. Different data types are allowed to be packed in an array.
