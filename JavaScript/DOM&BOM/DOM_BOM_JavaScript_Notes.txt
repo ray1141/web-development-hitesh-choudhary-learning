@@ -1,0 +1,115 @@
+DOM AND BOM — JAVASCRIPT SHORT NOTES
+=====================================
+
+1. BIG PICTURE
+--------------
+- HTML defines the structure of a webpage.
+- CSS controls the appearance.
+- JavaScript adds interactivity.
+- JavaScript uses browser APIs to interact with the webpage and the browser environment.
+
+2. DOM — DOCUMENT OBJECT MODEL
+-----------------------------
+- The DOM is a tree-like representation of an HTML document created by the browser.
+- It allows JavaScript to access and modify webpage elements, content, and styles.
+- Main entry point: document.
+
+Example HTML:
+<html>
+  <head>
+    <title>My Website</title>
+  </head>
+  <body>
+    <h1>Hello!</h1>
+    <p>Welcome to my website.</p>
+  </body>
+</html>
+
+Simplified DOM tree:
+document
+  └── html
+      ├── head
+      │   └── title
+      └── body
+          ├── h1
+          └── p
+
+Common DOM methods and properties:
+- document.getElementById("heading") — finds an element by its ID.
+- document.querySelector("p") — finds the first element matching a CSS selector.
+- document.querySelectorAll("p") — finds all elements matching a CSS selector.
+- element.textContent — reads or changes an element's text.
+- element.style.color = "red" — changes an element's text color.
+- document.createElement("p") — creates a new HTML element.
+
+Example:
+const heading = document.getElementById("heading");
+heading.textContent = "Hello, JavaScript!";
+
+3. BOM — BROWSER OBJECT MODEL
+-----------------------------
+- BOM refers to browser-provided objects and APIs that let JavaScript interact with the browser environment.
+- Main entry point: window.
+- It includes browser features such as the URL, browser history, screen information, and browser capabilities.
+
+Common BOM objects:
+- window — represents the browser window and provides access to many browser APIs.
+  Example: window.alert("Hello!");
+- screen — provides display information.
+  Example: console.log(screen.width);
+- navigator — provides information about the browser and its capabilities.
+  Example: console.log(navigator.language);
+- location — provides information about the current URL and supports navigation.
+  Example: console.log(location.href);
+- history — lets you navigate through the session history.
+  Examples: history.back(); history.forward();
+
+Other example:
+setTimeout(() => {
+  console.log("Hello after 2 seconds");
+}, 2000);
+
+4. DOM VS BOM
+-------------
+DOM:
+- Full form: Document Object Model
+- Focus: webpage structure and content
+- Main entry point: document
+- Examples: querySelector(), getElementById(), textContent
+
+BOM:
+- Full form: Browser Object Model
+- Focus: browser environment and features
+- Main entry point: window
+- Examples: location, navigator, history, screen
+
+Note:
+- document is available as window.document.
+- DOM and BOM are useful conceptual categories, but both are browser APIs.
+
+5. WINDOW OBJECT
+----------------
+- In a typical browser page, window represents the browser window and is the global object.
+- window.document accesses the current webpage's document.
+- Many browser APIs are available through window.
+- JavaScript language features are not all properties of window.
+
+6. DEFER ATTRIBUTE
+------------------
+Example:
+<script src="script.js" defer></script>
+
+- defer is used with external classic scripts.
+- The browser downloads the script while HTML parsing continues.
+- The script executes after HTML parsing finishes.
+- Deferred scripts execute in document order.
+- They execute before the DOMContentLoaded event.
+- defer does not mean the download waits until HTML parsing is complete; downloading can happen in parallel.
+
+7. QUICK MEMORY TRICK
+---------------------
+- DOM = interact with the webpage.
+- BOM = interact with the browser environment.
+- document = the current webpage.
+- window = browser window/global object in a typical browser page.
+- defer = download while parsing; execute after HTML parsing.

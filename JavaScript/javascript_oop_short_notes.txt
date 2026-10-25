@@ -1,0 +1,134 @@
+JAVASCRIPT OOP — SHORT NOTES
+============================
+
+1. OBJECT CREATION
+- Objects store related data as properties and behavior as methods.
+- `this` refers to the object calling a method (for example, `car.start()`).
+
+2. CONSTRUCTOR FUNCTIONS
+- A constructor function creates multiple objects with the same structure.
+- Constructor names conventionally start with a capital letter.
+- Use `new` to create an instance.
+- With `new`, `this` refers to the newly created object.
+
+Example:
+    const Person = function(name, age) {
+        this.name = name;
+        this.age = age;
+    };
+    const person = new Person("Anshika", 23);
+
+3. PROTOTYPES AND PROTOTYPE CHAIN
+- Objects can inherit properties and methods from their prototype.
+- `Constructor.prototype` is used as the prototype for instances created with `new Constructor()`.
+- JavaScript checks an object's own properties first, then follows the prototype chain.
+- Prototype methods are shared by instances.
+- Use regular functions for prototype methods that need `this` to refer to the instance.
+- Avoid modifying built-in prototypes such as `Array.prototype` in normal application code.
+
+Example:
+    const Animal = function(type) {
+        this.type = type;
+    };
+    Animal.prototype.speak = function() {
+        return `${this.type} makes a sound`;
+    };
+    const dog = new Animal("Dog");
+    dog.speak(); // "Dog makes a sound"
+
+4. CLASSES
+- `class` provides syntax for defining objects and their behavior.
+- `constructor()` initializes each instance.
+- Class methods are shared through the class's prototype.
+
+Example:
+    class Vehicle {
+        constructor(make, model) {
+            this.make = make;
+            this.model = model;
+        }
+        start() {
+            return `${this.model} is from ${this.make}`;
+        }
+    }
+
+5. INHERITANCE
+- Inheritance lets a class reuse behavior from another class.
+- `extends` makes a class inherit from another class.
+- A child class inherits accessible methods from its parent.
+- If a child class defines its own constructor, call `super(...)` before using `this`.
+
+Example:
+    class Car extends Vehicle {
+        drive() {
+            return `${this.make}: driving`;
+        }
+    }
+
+6. ENCAPSULATION
+- Encapsulation keeps data and related methods together and controls access to internal data.
+- A field declared with `#`, such as `#balance`, is private to its class.
+- Private fields cannot be accessed directly outside the class.
+- Methods can provide controlled access and validate changes.
+
+7. ABSTRACTION
+- Abstraction exposes useful operations while hiding unnecessary implementation details.
+- Example: a coffee machine's start button coordinates internal steps such as starting and brewing.
+- JavaScript has no built-in `abstract class` keyword; abstraction can be designed using ordinary classes and methods.
+
+8. POLYMORPHISM
+- Polymorphism means the same method name can behave differently for different objects.
+- Method overriding occurs when a child class provides its own implementation of a parent method.
+
+Example:
+    class Bird {
+        fly() { return "Flying..."; }
+    }
+    class Penguin extends Bird {
+        fly() { return "Penguins can't fly"; }
+    }
+
+9. STATIC METHODS
+- `static` methods belong to the class itself, not its instances.
+- Call them using `ClassName.method()`.
+- They generally don't require instance-specific data.
+
+Example:
+    class Calculator {
+        static add(a, b) { return a + b; }
+    }
+    Calculator.add(2, 3); // 5
+
+10. GETTERS AND SETTERS
+- A getter runs when a property is read.
+- A setter runs when a property is assigned.
+- They can validate values and control access to private fields.
+- Ensure the setter updates the intended field (for example, `this.#salary`, not `this._salary`).
+
+Example:
+    class Employee {
+        #salary;
+        constructor(name, salary) {
+            this.name = name;
+            if (salary < 0) throw new Error("Salary cannot be negative");
+            this.#salary = salary;
+        }
+        get salary() { return this.#salary; }
+        set salary(value) {
+            if (value < 0) throw new Error("Salary cannot be negative");
+            this.#salary = value;
+        }
+    }
+
+QUICK REVISION
+- Object: properties + methods.
+- Constructor: initializes new instances.
+- `new`: creates an object and links its prototype.
+- Prototype: enables inheritance and shared methods.
+- Class: syntax for creating objects and defining methods.
+- Inheritance: reuse behavior with `extends`.
+- Encapsulation: control access to data, often using `#privateField`.
+- Abstraction: expose simple operations, hide implementation details.
+- Polymorphism: same method name, different behavior.
+- Static method: belongs to the class, not an instance.
+- Getter/setter: control reading and assigning a property.

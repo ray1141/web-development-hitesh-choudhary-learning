@@ -1,0 +1,99 @@
+JAVASCRIPT NOTES: CONSTRUCTOR FUNCTIONS & PROTOTYPES
+====================================================
+
+1. CONSTRUCTOR FUNCTIONS
+-----------------------
+- A constructor function creates multiple objects with the same structure.
+- By convention, constructor names start with a capital letter (Person, Car, Animal).
+- Use the `new` keyword to create an instance of a constructor.
+- When called with `new`, `this` refers to the newly created object.
+- Assign instance properties using `this.propertyName`.
+- If no other object is explicitly returned, the new object is returned automatically.
+
+Example:
+    const Person = function(name, age) {
+        this.name = name;
+        this.age = age;
+    };
+
+    const p1 = new Person("Hitesh", 19.5);
+    const p2 = new Person("Rahul", 22);
+
+- p1 and p2 are separate instances of Person.
+- Each instance has its own name and age properties.
+
+How `new` works:
+1. Creates a new object.
+2. Links the object's prototype to Constructor.prototype.
+3. Executes the constructor with `this` referring to the new object.
+4. Returns the new object automatically, unless the constructor explicitly returns another object.
+
+- `new.target` checks whether a function was called using `new`.
+- `throw new Error("message")` throws an error and interrupts normal execution.
+
+
+2. PROTOTYPES
+-------------
+- Every JavaScript object has an internal [[Prototype]] link, which points to another object or null.
+- A prototype allows objects to inherit properties and methods from another object.
+- `Constructor.prototype` is the object used as the prototype for instances created with `new Constructor()`.
+- Methods added to a constructor's prototype are shared among instances, rather than recreated for every instance.
+- When accessing a property, JavaScript checks the object first, then follows the prototype chain until the property is found or the chain ends at null.
+
+Example:
+    const Animal = function(species) {
+        this.species = species;
+    };
+
+    Animal.prototype.sound = function() {
+        return `${this.species} makes a sound.`;
+    };
+
+    const dog = new Animal("Dog");
+    const cat = new Animal("Cat");
+
+    dog.sound(); // "Dog makes a sound."
+    cat.sound(); // "Cat makes a sound."
+
+    dog.sound === cat.sound; // true
+
+- `species` is an own property of each instance.
+- `sound()` is inherited from Animal.prototype.
+- Both instances use the same sound() function.
+
+
+3. `__proto__` VS. `prototype`
+------------------------------
+- `__proto__`: An accessor for an object's internal prototype; it is also special syntax in object literals.
+- `Constructor.prototype`: The object used as the prototype for instances created with that constructor.
+- `Object.getPrototypeOf(obj)`: Recommended way to retrieve an object's prototype.
+- `Object.hasOwn(obj, "key")`: Checks whether a property belongs directly to an object.
+
+Example:
+    const computer = { cpu: 12 };
+
+    const lenovo = {
+        screen: "HD",
+        __proto__: computer
+    };
+
+    lenovo.cpu; // 12 (inherited)
+    Object.hasOwn(lenovo, "cpu"); // false
+
+    Object.getPrototypeOf(lenovo) === computer; // true
+
+
+4. KEY POINTS TO REMEMBER
+-------------------------
+- `new Constructor()` creates a new instance.
+- `this.name = name` assigns a property to the current instance.
+- `Constructor.prototype.method = function() {}` defines a shared method.
+- Arrow functions do not have their own `this`; avoid using them as ordinary object methods when you need `this` to refer to the calling object.
+- Methods defined inside a constructor are recreated for each instance; prototype methods are shared.
+- JavaScript `class` syntax also uses prototypes behind the scenes.
+
+QUICK REVISION
+--------------
+Constructor = creates and initializes objects.
+Prototype = enables inheritance and shared methods.
+`this` = refers to the new object in a constructor called with `new`.

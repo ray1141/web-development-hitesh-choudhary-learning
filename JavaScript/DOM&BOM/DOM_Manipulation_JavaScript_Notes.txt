@@ -1,0 +1,151 @@
+DOM MANIPULATION IN JAVASCRIPT — SHORT NOTES
+==============================================
+
+1. WHAT IS DOM MANIPULATION?
+DOM manipulation means using JavaScript to read, change, add, or remove webpage elements.
+
+Common pattern: Select an element -> listen for an event -> perform an action.
+
+Example:
+document.getElementById("myButton").addEventListener("click", function () {
+  document.getElementById("myParagraph").textContent = "Text changed!";
+});
+
+2. SELECTING ELEMENTS
+- document.getElementById("id") — selects an element by ID.
+- document.querySelector("selector") — selects the first element matching a CSS selector.
+- document.querySelectorAll("selector") — selects all matching elements.
+
+If the element does not exist when selected, getElementById() or querySelector() returns null. Calling a method on null can cause an error.
+
+3. CHANGING TEXT AND INPUT VALUES
+- element.textContent — reads or changes an element's text.
+- input.value — reads or changes an input field's current value.
+
+Example:
+document.getElementById("heading").textContent = "Welcome!";
+const feedback = document.getElementById("feedbackInput").value;
+
+Remember: use textContent for displayed text and value for input fields.
+
+4. EVENT HANDLING
+addEventListener() registers a function to run when an event happens.
+
+Example:
+button.addEventListener("click", function () {
+  console.log("Button clicked");
+});
+
+Common events:
+- "click" — user clicks an element.
+- "dblclick" — user double-clicks an element.
+- "submit" — a form is submitted.
+- "input" — an input's value changes as the user types.
+- "DOMContentLoaded" — HTML has been parsed and the DOM is ready.
+
+5. CHANGING STYLES AND CSS CLASSES
+Inline styles:
+element.style.backgroundColor = "brown";
+element.style.padding = "3px";
+
+JavaScript style properties use camelCase:
+CSS background-color -> JavaScript backgroundColor
+CSS font-size -> JavaScript fontSize
+
+CSS classes:
+- element.classList.add("highlight") — adds a class.
+- element.classList.remove("highlight") — removes a class.
+- element.classList.toggle("highlight") — adds the class if absent, removes it if present.
+
+The class must have CSS rules to produce a visual effect.
+
+Example CSS:
+.highlight {
+  background-color: yellow;
+}
+
+6. NAVIGATING CHILD ELEMENTS
+- element.firstElementChild — gets the first child element.
+- element.lastElementChild — gets the last child element.
+- element.children — gives the child elements.
+
+Example:
+const list = document.getElementById("citiesList");
+list.firstElementChild.classList.add("highlight");
+
+Check that the last child exists before removing it:
+if (list.lastElementChild) {
+  list.lastElementChild.remove();
+}
+
+7. CREATING AND REMOVING ELEMENTS
+const newItem = document.createElement("li");
+newItem.textContent = "Eggs";
+document.getElementById("shoppingList").appendChild(newItem);
+
+- createElement("li") creates a new element.
+- textContent sets its text.
+- appendChild(newItem) inserts it as the last child.
+
+Remove an element with:
+element.remove();
+
+8. EVENT OBJECT AND EVENT DELEGATION
+The event object contains information about an event. Its parameter may be named event, e, or another name.
+
+- event.target — the element where the event originated.
+- event.target.matches(".teaItem") — checks whether the target matches a CSS selector.
+
+Event delegation means putting one listener on a parent to handle events from matching child elements. It can also handle matching children added later.
+
+Example:
+document.getElementById("teaList").addEventListener("click", function (event) {
+  if (event.target.matches(".teaItem")) {
+    alert(`You selected ${event.target.textContent}`);
+  }
+});
+
+9. FORM SUBMISSION AND preventDefault()
+Example:
+document.getElementById("feedbackForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  const feedback = document.getElementById("feedbackInput").value;
+  document.getElementById("feedbackDisplay").textContent = `Feedback is ${feedback}`;
+});
+
+- "submit" listens for form submission.
+- e.preventDefault() stops the browser's default form submission behavior, which may reload or navigate the page.
+- .value reads the user's input.
+
+10. DOMContentLoaded
+document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("domStatus").textContent = "DOM is ready!";
+});
+
+DOMContentLoaded fires after the HTML has been parsed and the DOM has been constructed. With a classic external script using defer, the DOM is parsed before the script executes, so this listener is often unnecessary just to access existing elements.
+
+11. QUICK REFERENCE
+getElementById()       -> select by ID
+querySelector()        -> select first CSS-selector match
+textContent            -> read/change text
+value                  -> read/change input value
+style                   -> change inline styles
+classList.add()         -> add CSS class
+classList.remove()      -> remove CSS class
+classList.toggle()      -> toggle CSS class
+firstElementChild      -> first child element
+lastElementChild       -> last child element
+createElement()        -> create element
+appendChild()          -> insert element as last child
+remove()               -> remove element
+addEventListener()     -> respond to an event
+event.target            -> element where event originated
+matches()               -> test against a CSS selector
+preventDefault()        -> prevent default event behavior
+DOMContentLoaded        -> HTML parsed; DOM constructed
+
+12. MEMORY TRICK
+Select -> Listen -> Change.
+- Select the element.
+- Listen for the relevant event.
+- Change text, styles, classes, or DOM structure.

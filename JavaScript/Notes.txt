@@ -33,3 +33,60 @@ Use typeof method to know the data type of the variable.
     c) objects
 2. A const object can have mutable key-value pairs. 
 3. Different data types are allowed to be packed in an array.
+
+===================LOOPS=========================
+1. for-in loop: for(const key in object){}
+    - here const key is because in every iteration, key points to a new memory block. for non-primitives, const means that the memory address should not be changed. 
+2. for-of loop: for(const variable of iterable){}
+    - similar to for-in loop, here as well const variable is used because in every iteration variable points to a new memory block 
+3. forEach loop: built-in array method used to execute a provided function once for each array element.
+array.forEach((element)=> console.log(element)); {uses arrow function as callback function}
+
+===================FUNCTIONS=====================
+1. Arrow function - const greet = () => {}
+2. Higher order functions OR first-class functions - accepting and passing function as an argument, can be returned as an argument. 
+                          - functions are used as variables. 
+3. Lexical Scoping/Closures - inner function can access variables from outer function. The scope is defined through nesting and not how the functions are invoked. 
+
+=====================PROTOTYPES==================================
+1. JS was initially prototype-based language and not OOP based. 
+2. They opted for an approach to use class, object, ctor etc but ultimately it will be converted to prototype-based.
+3. To access prototype: __<object name>.proto__
+4. Node doesn't show inbuilt properties but show injected properties. The injected property doesn't become the property of the child object, the child object actually accesses parent's object.
+5. Object.setPropertyOf(a,b) => access properties of b in a so, a is the child class inheriting properties of parent b.  
+6. Object.getPropertyOf(a) => will show the injected property of a. 
+7. An object first checks its own properties. If a property isn't there, JavaScript follows the prototype link, continuing up the chain until it finds the property or reaches null.
+
+==========================CONSTRUCTOR FUNCTION=================================
+1. this keyword refers to the newly created object. 
+2. new keyword is required for the object. 
+3. To add new property to a constructor use: <Ctor>.prototype.<function name> = function()
+
+==============================OBJECT-ORIENTED PROGRAMMING===========================
+1. Encapsulation - restricting direct access to object data
+2. Inheritance
+3. Polymorphism - behaviour of methods being different but exact same name
+4. Abstraction - we don't care about how things are implemented internally. We just want the result/message
+5. Static method - can be called by the class itself
+
+===============================DOM AND BOM======================================
+1. defer keyword - to defer the loading of JavaScript.
+2. Whole browser is known as window object. 
+3.                 Window 
+                 /   |   \
+              DOM   BOM   JavaScript
+               |     |         |
+        elements   screen     objects
+                   navigator  array
+                   location   functions
+                              class
+4. DOM - Document Object Model and BOM - Browser Object Model
+                    html
+            head            body
+                            h1      p   
+                            p 
+
+=============================DOM MANIPULATION==============================
+1. Get the element - access the element 
+2. Event listening - listen to an event. example - hover, keyboard key, scroll, click, page reload
+3. DOM is different from HTML. HTML -- markup langage and DOM - processed elements in Document tree in memory

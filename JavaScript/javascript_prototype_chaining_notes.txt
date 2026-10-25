@@ -1,0 +1,100 @@
+JavaScript Prototypes — Prototype Chaining
+============================================
+
+1. What is a prototype?
+- In JavaScript, objects can inherit properties and methods from another object.
+- A prototype is an object that another object can inherit from.
+- JavaScript searches the prototype chain when a property or method is not found directly on an object.
+
+2. What is prototype chaining?
+- Prototype chaining connects objects so that one object can inherit from another object's prototype.
+- Example chain:
+  dog -> Dog.prototype -> Animal.prototype -> Object.prototype -> null
+
+3. Example: Animal and Dog constructors
+
+function Animal() {}
+
+Animal.prototype.speak = function() {
+    return "Animal speaking";
+};
+
+function Dog() {}
+
+// Make Dog.prototype inherit from Animal.prototype
+Dog.prototype = Object.create(Animal.prototype);
+
+// Restore the constructor reference after replacing Dog.prototype
+Dog.prototype.constructor = Dog;
+
+Dog.prototype.bark = function() {
+    return "Woof!";
+};
+
+const dog = new Dog();
+
+console.log(dog.speak()); // "Animal speaking"
+console.log(dog.bark());  // "Woof!"
+
+4. Step-by-step explanation
+- Step 1: `function Animal() {}` creates the parent constructor.
+- Step 2: `Animal.prototype.speak = ...` adds a shared speak() method to Animal.prototype.
+- Step 3: `function Dog() {}` creates the child constructor.
+- Step 4: `Dog.prototype = Object.create(Animal.prototype)` makes Dog.prototype inherit from Animal.prototype.
+- Step 5: `Dog.prototype.constructor = Dog` restores the conventional constructor reference.
+- Step 6: `Dog.prototype.bark = ...` adds a method specific to dogs.
+- Step 7: `new Dog()` creates a dog object that can access both methods.
+
+5. How does JavaScript find a method?
+When evaluating `dog.speak()`:
+1. JavaScript checks the `dog` object itself.
+2. Then it checks `Dog.prototype`.
+3. Then it checks `Animal.prototype`, where it finds `speak()`.
+4. If it still cannot find the property, it continues up the chain to Object.prototype and eventually null.
+
+When evaluating `dog.bark()`, JavaScript finds bark() on Dog.prototype.
+
+6. Verify the prototype chain
+
+console.log(
+    Object.getPrototypeOf(Dog.prototype) === Animal.prototype
+); // true
+
+console.log(dog instanceof Dog);    // true
+console.log(dog instanceof Animal); // true
+
+- `Object.getPrototypeOf(obj)` returns the object's prototype.
+- `instanceof` checks whether a constructor's prototype appears in an object's prototype chain.
+
+7. Important distinction
+- `Dog.prototype` is the object used as the prototype for instances created with `new Dog()`.
+- `Object.getPrototypeOf(dog)` returns the actual prototype of the `dog` instance (Dog.prototype).
+- `Object.create(Animal.prototype)` creates a new object whose prototype is Animal.prototype.
+- Do not use `Dog.prototype = Animal.prototype` for inheritance: both constructors would share the same prototype object, so adding child methods could affect the parent too.
+
+8. Quick revision pattern
+
+function Parent() {}
+Parent.prototype.parentMethod = function() {
+    return "Parent method";
+};
+
+function Child() {}
+Child.prototype = Object.create(Parent.prototype);
+Child.prototype.constructor = Child;
+
+Child.prototype.childMethod = function() {
+    return "Child method";
+};
+
+const item = new Child();
+item.parentMethod(); // "Parent method"
+item.childMethod();  // "Child method"
+
+Remember:
+1. Create parent constructor.
+2. Add shared methods to Parent.prototype.
+3. Create child constructor.
+4. Link with Child.prototype = Object.create(Parent.prototype).
+5. Add child methods.
+6. Create an instance with `new` and test inherited and own prototype methods.
