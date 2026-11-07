@@ -1,0 +1,171 @@
+JAVASCRIPT — SHORT REVISION NOTES
+
+1. Synchronous and Asynchronous JavaScript
+Synchronous code runs statements in order. Asynchronous APIs (timers, network requests, events) allow work to finish later while other code continues. setTimeout schedules a callback after a minimum delay.
+
+console.log("A");
+setTimeout(() => console.log("B"), 0);
+console.log("C");
+// Output: A, C, B
+
+Remember: Call stack executes synchronous code. Timer callbacks enter a task queue; Promise reactions enter the microtask queue. The event loop processes queued work when execution permits.
+
+-----------------------------------------------------------------
+
+2. Closures
+A closure is a function together with access to its lexical environment. It retains access to outer variables after the outer function returns.
+
+function outer() {
+  let counter = 3;
+  return () => ++counter;
+}
+const inc = outer();
+console.log(inc(), inc(), inc()); // 4 5 6
+
+Remember: Uses: private state, event handlers, function factories. Each call to outer() creates a separate captured environment.
+
+-----------------------------------------------------------------
+
+3. this keyword
+For regular functions, this depends on how they are called. obj.method() sets this to obj. Detached methods lose that receiver; in strict mode this is undefined. Arrow functions capture this lexically.
+
+const person = { name: "Anshika",
+  greet() { return `Hi, ${this.name}`; }
+};
+console.log(person.greet()); // Hi, Anshika
+const f = person.greet;
+// f() throws TypeError in strict mode
+
+Remember: Do not use an arrow function as an object method if you need this to refer to the object.
+
+-----------------------------------------------------------------
+
+4. bind, call, apply
+bind(thisArg, ...args) returns a new function; call(thisArg, ...args) executes now; apply(thisArg, argsArray) executes now with array-like arguments.
+
+function intro(city) { return `${this.name}: ${city}`; }
+const user = { name: "Anshika" };
+console.log(intro.call(user, "Delhi"));
+console.log(intro.apply(user, ["Delhi"]));
+const bound = intro.bind(user);
+console.log(bound("Delhi"));
+
+Remember: All three print Anshika: Delhi. Binding an already bound function again does not replace its bound this.
+
+-----------------------------------------------------------------
+
+5. Prototypal inheritance
+Objects can delegate property lookup to their prototype. Instances made with new Person() normally inherit from Person.prototype. Prototype methods are shared.
+
+function Person(name) { this.name = name; }
+Person.prototype.greet = function () {
+  return `Hello, ${this.name}`;
+};
+const a = new Person("Anshika");
+console.log(a.greet()); // Hello, Anshika
+console.log(Object.getPrototypeOf(a) === Person.prototype); // true
+
+Remember: Lookup chain: instance -> Person.prototype -> Object.prototype -> null. class syntax also uses prototypes.
+
+-----------------------------------------------------------------
+
+6. Promises
+A Promise represents an eventual result. States: pending, fulfilled, rejected. resolve(value) fulfills; reject(reason) rejects. .then() handles fulfillment, .catch() handles rejection, .finally() runs on settlement.
+
+const task = new Promise((resolve) => {
+  setTimeout(() => resolve("Done"), 1000);
+});
+task.then(v => {
+  console.log(v);
+  return "Next";
+}).then(console.log).catch(console.error);
+
+Remember: Each .then() returns a new Promise. Returned values pass along the chain; thrown errors and rejected Promises move to the nearest rejection handler. Promise constructors execute their executor immediately.
+
+-----------------------------------------------------------------
+
+7. async/await and Promise.all
+An async function always returns a Promise. await pauses that async function until a value settles; rejection throws. Use try/catch for errors. Promise.all waits for all fulfillment or rejects on the first rejection.
+
+const posts = () => new Promise(r => setTimeout(() => r("Posts"), 2000));
+const comments = () => new Promise(r => setTimeout(() => r("Comments"), 3000));
+async function load() {
+  try {
+    const [p, c] = await Promise.all([posts(), comments()]);
+    console.log(p, c);
+  } catch (e) { console.error(e); }
+}
+load();
+
+Remember: Sequential await of these calls takes about 5 seconds; Promise.all takes about 3 seconds. allSettled waits for every outcome; race settles first; any fulfills first or rejects if all reject.
+
+-----------------------------------------------------------------
+
+8. Iterators
+An iterator has next(), which returns { value, done }. Iterables implement Symbol.iterator and can be used with for...of.
+
+const it = [10, 20][Symbol.iterator]();
+console.log(it.next()); // { value: 10, done: false }
+console.log(it.next()); // { value: 20, done: false }
+console.log(it.next()); // { value: undefined, done: true }
+
+Remember: Arrays, strings, Maps and Sets are iterable. An iterator and an iterable are related but not identical concepts.
+
+-----------------------------------------------------------------
+
+9. Generators
+A function* creates a generator object. Calling next() resumes execution until the next yield; generators remember their position. Separate instances have separate states.
+
+function* nums() { yield 1; yield 2; yield 3; }
+const a = nums(), b = nums();
+console.log(a.next().value); // 1
+console.log(a.next().value); // 2
+console.log(b.next().value); // 1
+console.log(a.next().value); // 3
+console.log(a.next()); // { value: undefined, done: true }
+
+Remember: Generators support lazy generation and potentially infinite sequences; yield pauses without exhausting the whole sequence.
+
+-----------------------------------------------------------------
+
+10. ES Modules (ESM)
+Use export for named exports and export default for one default export per module. Import named exports with braces; default imports without braces.
+
+// math.js
+export const add = (a, b) => a + b;
+export const sub = (a, b) => a - b;
+export default function mul(a, b) { return a * b; }
+
+// app.js
+import mul, { add, sub } from "./math.js";
+console.log(mul(2, 3), add(1, 3), sub(10, 5)); // 6 4 5
+
+Remember: For Node.js ESM use package.json {"type":"module"} or .mjs. Browsers use <script type="module">.
+
+-----------------------------------------------------------------
+
+11. CommonJS
+Node.js CommonJS uses module.exports to expose values and require() to import them. CommonJS and ESM have different module-loading rules.
+
+// math.cjs
+const add = (a, b) => a + b;
+const sub = (a, b) => a - b;
+const mul = (a, b) => a * b;
+module.exports = { add, sub, mul };
+
+// app.cjs
+const { add, sub, mul } = require("./math.cjs");
+console.log(add(2, 3), sub(5, 3), mul(2, 3)); // 5 2 6
+
+Remember: A function without return (e.g., { a * b; }) returns undefined. Use .cjs or {"type":"commonjs"} for CommonJS in Node.js.
+
+-----------------------------------------------------------------
+
+QUICK RECAP
+Closure: function + retained lexical scope.
+this: depends on regular function call site.
+bind: new function; call/apply: immediate execution.
+Prototype: shared delegation chain.
+Promise: eventual result; async/await: syntax over Promises.
+Iterator: next(); generator: function* + yield.
+ESM: import/export; CommonJS: require/module.exports.

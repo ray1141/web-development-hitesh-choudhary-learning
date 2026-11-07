@@ -90,3 +90,25 @@ array.forEach((element)=> console.log(element)); {uses arrow function as callbac
 1. Get the element - access the element 
 2. Event listening - listen to an event. example - hover, keyboard key, scroll, click, page reload
 3. DOM is different from HTML. HTML -- markup langage and DOM - processed elements in Document tree in memory
+
+==============================ASYNCHRONOUS JAVASCRIPT=========================
+1. Sync - line-by-line execution code 
+2. JS doesn't have that behaviour inheretly.
+3. Async - having a pause. example - Network calls, read/write files, time functions, user input and others.
+
+===============================CLOSURES=======================================
+1. Closures are functions in which functions have created, those created functions have the memory retained of outer functions. 
+
+=============================PROMISES====================================
+1. Promises - utility of creating async behaviour of js. 
+2. Promise is in one of the three states - pending, fulfilled, rejected. 
+    pending - neither fulfilled nor rejected
+    fulfilled - completed 
+    rejected - errored
+3. Promise chaining - use then() and catch() methods.
+
+============================PROTOTYPAL INHERITANCE=========================
+1. inheritance using prototypes
+
+==============================ASYNC AND AWAIT==============================
+1. can only use await if you have async in your function
